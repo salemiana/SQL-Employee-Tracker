@@ -39,6 +39,21 @@ const promptChoices = () => {
         if (choices === "view all departments") {
           viewAllDepartments();
         }
+        if (choices === "view all roles") {
+          viewAllRolls();
+        }
+        if (choices === "view all employees") {
+          viewAllEmployees();
+        }
+        if (choices === "add a department") {
+          addDepartment();
+        }
+        if (choices === "add a role") {
+          addRole();
+        }
+        if (choices === "update an emloyee role") {
+          updateRole();
+        }
       })
   );
 };
@@ -53,3 +68,28 @@ const viewAllDepartments = () => {
   });
 };
 promptChoices();
+
+//functions to add departments
+// write out inq prompt to ask whats the name of the depqartment
+// youll use the .then and assign there anwse
+// write sql query to inserts into department table on department name with value(?)
+//call function view all departments
+//console log your steps to see whats going on
+const addDepartment = () => {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "newDept",
+        message: "Please enter a department name?",
+      },
+    ])
+    .then((answer) => {
+      const sql = `INSERT INTO departments AS department (name) VALUES ('?')`;
+      con.query(sql, (error, response) => {
+        if (error) throw error;
+        console.log("viewAllDepartments");
+        viewAllDepartments();
+      });
+    });
+};
