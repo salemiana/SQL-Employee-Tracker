@@ -1,22 +1,25 @@
-use employees;
+USE emp_tracker;
+
 INSERT INTO department
     (name)
 VALUES
-    ('Operations'),
-    ('Analystics'),
+    ('Accounting'),
+    ('IT Support'),
     ('Marketing'),
     ('Executive');
+
 INSERT INTO role
     (title, salary, department_id)
 VALUES
     ('General Manager', 3000000, 1),
-    ('Coach', 2500000, 1),
-    ('Team Lead Analyst', 800000, 2),
-    ('Team Analyst', 750000, 2),
-    ('Media Manager', 700000, 3),
-    ('Media Specialist', 450000, 3),
+    ('Developer', 2500000, 1),
+    ('Engineer', 800000, 2),
+    ('QA', 750000, 2),
+    ('Service', 700000, 3),
+    ('Accountant', 450000, 3),
     ('CEO', 5550000, 4),
-    ('CEO Assistant', 660000, 4);
+    ('Intern', 6600, 4);
+
 INSERT INTO employee
     (first_name, last_name, role_id, manager_id)
 VALUES
