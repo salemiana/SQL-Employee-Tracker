@@ -11,7 +11,7 @@ VALUES
 INSERT INTO role
     (title, salary, department_id)
 VALUES
-    ('General Manager', 3000000, 1),
+    ('Manager', 3000000, 1),
     ('Developer', 2500000, 1),
     ('Engineer', 800000, 2),
     ('QA', 750000, 2),
