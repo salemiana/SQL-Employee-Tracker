@@ -16,12 +16,12 @@ const choiceArray = [];
 // start of manager prompts
 
 const promptChoices = () => {
-  return (
+  //return (
     inquirer
       .prompt([
         {
           type: "list",
-          name: "dept",
+          name: "opt",
           message: "Please choose an option",
           choices: [
             "view all departments",
@@ -31,8 +31,9 @@ const promptChoices = () => {
             "add a role",
             "add an employee",
             "update an employee role",
+            "exit"
           ],
-        },
+        }
       ])
       //Assigns choice to anwser if choice == call function
       .then((answer) => {
@@ -40,53 +41,53 @@ const promptChoices = () => {
         if (choices === "view all departments") {
           viewAllDepartments();
         }
-        else if (choices === "view all roles") {
+        if (choices === "view all roles") {
           viewAllRoles();
         }
-        else if (choices === "view all employees") {
+        if (choices === "view all employees") {
           viewAllEmployees();
         }
         //choiceArray.push();
         if (choices === "add a department") {
           addDepartment();
         }
-        else if (choices === "add a role") {
+        if (choices === "add a role") {
           addRole();
         }
-        else if (choices === "add an employee") {
+        if (choices === "add an employee") {
             addEmployee();
           }
-        // else (choices === "update an emloyee role"); {
-        //   updateRole();
-        // // } else {
-        // //     console.log("Fine job!");
-        // //     connected();
-        //  };
-      })
-  )}
+        if (choices === "update an emloyee role") {
+          updateRole();
+        } 
+        if(choices === 'Exit') {
+            connection.end();
+         }
+      });
+  };
     
 
 
 //functions to view departments
 const viewAllDepartments = () => {
-  const sql = `SELECT department.id, department.name AS department FROM department`;
+  const sql = `SELECT department.id AS id, department.name AS department FROM department`;
   con.query(sql, (error, response) => {
     if (error) throw error;
-    console.log("All Departments");
+    //console.log("All Departments");
     console.table(res);
-    //promptChoices();
+    promptChoices();
   });
 };
-promptChoices();
+//promptChoices();
 
-async function getDepartment(_) {
-    const sql = "SELECT * FROM department";
-    con.query(sql, (err, res) => {
-      if (err) throw err;
-      console.log(res);
-      return res;
-    });
-  }
+// async function getDepartment(_) {
+//     const sql = "SELECT * FROM department";
+//     con.query(sql, (err, res) => {
+//       if (err) throw err;
+//       console.log(res);
+//       return res;
+//     });
+//   }
 
 // WHEN I choose to view all roles title, salary, department_id
 // THEN I am presented with the job title, role id, the department that role belongs to, and the salary for that role
@@ -95,10 +96,10 @@ const viewAllRoles = () => {
     con.query(sql, (error, response) => {
       if (error) throw error;
       console.log("All Roles");
-      promptChoices();
+      //promptChoices();
     });
   };
-  promptChoices();
+  //promptChoices();
 
   //functions to view employees first_name, last_name, role_id, manager_id
 const viewAllEmployees = () => {
