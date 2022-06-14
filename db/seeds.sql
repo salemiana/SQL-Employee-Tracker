@@ -1,7 +1,7 @@
 USE emp_tracker;
 
 INSERT INTO department
-    (name)
+    (id, name)
 VALUES
     ('Accounting'),
     ('IT Support'),
