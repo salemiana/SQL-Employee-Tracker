@@ -3,16 +3,12 @@ const inquirer = require("inquirer");
 const tables = require("console.table");
 // const db = require("/db");
 const con = require("./config/server.js");
-// con.query(`SELECT employee.id, employee.first_name, employee.last_name, role.id AS "role_id"
-// FROM employee, role, department WHERE department.id = role.department_id AND role.id = employee.role_id`, (err, res) => {
-//   console.log(res);
-// });
+
 // ----------------------------------------------------------------------
 //                                VIEW
 //-----------------------------------------------------------------------
 
 // start of manager prompts
-
 const promptChoices = () => {
   //return (
   inquirer
@@ -28,8 +24,7 @@ const promptChoices = () => {
           "add a department",
           "add a role",
           "add an employee",
-          "update an employee role",
-          "exit",
+          "update an employee role"
         ],
       },
     ])
@@ -46,7 +41,8 @@ const promptChoices = () => {
       if (choices === "view all employees") {
         viewAllEmployees();
       }
-      //choiceArray.push();
+      
+      
       if (choices === "add a department") {
         addDepartment();
       }
@@ -65,7 +61,6 @@ const promptChoices = () => {
     });
 };
 
-//choiceArray.push(department);
 
 //functions to view departments
 const viewAllDepartments = () => {
@@ -117,11 +112,7 @@ promptChoices();
 //                                ADD
 //-----------------------------------------------------------------------
 // functions to add departments
-// write out inq prompt to ask whats the name of the department
-// youll use the .then and assign there answer
-// write sql query to inserts into department table on department name with value(?)
-// call function view all departments
-// console log your steps to see whats going on
+
 const addDepartment = () => {
   inquirer
     .prompt([
@@ -172,14 +163,6 @@ const addRole = () => {
           choices: deptNameArray,
         },
       ])
-
-      //loop through choices: deptNameArray
-      //store in var
-      //use var in sql call after WHERE name
-      // let deptNameArray = [];
-      // for (let i = 0; i < arr.length; i++) {
-      //   console.log(arr[i]);
-      // }
       .then((answer) => {
         let deptName = deptNameArray.indexOf(answer.deptName) + 1;
         const sql = `INSERT INTO role (title, salary, department_id) 
