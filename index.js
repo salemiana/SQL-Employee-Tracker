@@ -210,7 +210,7 @@ const addEmployee = () => {
 
       .then((answer) => {
         let roleName =
-          roleNameArray.indexOf(answer.firstName + "" + answer.lastName) + 1;
+          roleNameArray.indexOf(answer.roleName) + 1;
         const sql = `INSERT INTO employee (first_name, last_name, role_id) 
         VALUES ("${answer.firstName}", "${answer.lastName}", "${roleName}")`;
 
@@ -231,14 +231,13 @@ const addEmployee = () => {
 // Update an Employee's Role
 const updateRole = () => {
 
-  console.log("clicked")
   let sql = `SELECT employee.id, employee.first_name, employee.last_name, role.id AS "role_id"
                     FROM employee, role, department WHERE department.id = role.department_id AND role.id = employee.role_id`;
-  con.query(sql, (error, response) => {
+  con.query(sql, (error, result) => {
     if (error) throw error;
     let employeeNamesArray = [];
-    response.forEach((employee) => {
-      employeeNamesArray.push(`${employee.first_name} ${employee.last_name}`);
+    result.forEach((employee) => {
+      employeeNamesArray.push(`${employee.first_name} ${employee.last_name} ${employee.role_id}`);
     });
 
     let pickles = `SELECT role.id, role.title FROM role`;
@@ -273,11 +272,8 @@ const updateRole = () => {
             }
           });
 
-          response.forEach((employee) => {
-            if (
-              answer.chosenEmployee ===
-              `${employee.first_name} ${employee.last_name}`
-            ) {
+          result.forEach((employee) => {
+            if (answer.chosenEmployee ===`${employee.first_name} ${employee.last_name} ${employee.id}`) {
               employeeId = employee.id;
             }
           });
@@ -286,7 +282,7 @@ const updateRole = () => {
           con.query(tony, [newTitleId, employeeId], (error) => {
             if (error) throw error;
             console.log(`Employee Role Updated`);
-            promptChoices();
+            viewAllEmployees();
           });
         });
     });

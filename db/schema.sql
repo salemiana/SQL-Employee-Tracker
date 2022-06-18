@@ -1,3 +1,6 @@
+DROP DATABASE IF EXISTS emp_tracker;
+CREATE DATABASE emp_tracker;
+USE emp_tracker;
 
 CREATE TABLE department (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
